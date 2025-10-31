@@ -20,7 +20,7 @@ public class CarController {
     public ResponseEntity<String> save(@RequestBody Car car) {
         try {
             Car savedCar = carService.save(car);
-            return  new ResponseEntity<>(savedCar.getId().toString(), HttpStatus.OK);
+            return  new ResponseEntity<>(savedCar.getId().toString(), HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<String>("Error on saving",  HttpStatus.BAD_REQUEST);
         }
@@ -29,8 +29,8 @@ public class CarController {
     @GetMapping
     public ResponseEntity<List<Car>> findAll() {
         try {
-            List<Car> cars = carService.findAll();
-            return new ResponseEntity<>(cars, HttpStatus.OK);
+            List<Car> list = carService.findAll();
+            return new ResponseEntity<>(list, HttpStatus.OK);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }

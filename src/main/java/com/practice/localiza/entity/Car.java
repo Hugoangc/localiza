@@ -2,12 +2,16 @@ package com.practice.localiza.entity;
 
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 public class Car {
 
     @Id
@@ -20,16 +24,6 @@ public class Car {
     private Integer manufactureYear;
     private boolean carStatus;
 
-//    public Car (){
-//    }
 
-//    public Car(String name, String color, Double price, String brand, Integer manufactureYear, boolean carStatus) {
-//        this.name = name;
-//        this.color = color;
-//        this.price = price;
-//        this.brand = brand;
-//        this.manufactureYear = manufactureYear;
-//        this.carStatus = carStatus;
-//    }
 
 }

@@ -18,11 +18,7 @@ public class CarService {
     }
 
     public Car findById(Long id) {
-        if (id == 1){
-            Car car = new Car();
-            car.setId(id);
-            return car;
-        } else return null;
+        return carRepository.findById(id).orElse(null);
     }
 
     public List<Car> findAll() {
