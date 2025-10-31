@@ -23,22 +23,21 @@ public class CarService {
         } else return null;
     }
 
-    public Car update(Long id, Car carNovosDados) {
+    public Car update(Long id, Car newCarData) {
 
-
-        Car carroExistente = this.findById(id);
-        carroExistente.setName(carNovosDados.getName());
-        carroExistente.setColor(carNovosDados.getColor());
-        carroExistente.setPrice(carNovosDados.getPrice());
-        carroExistente.setBrand(carNovosDados.getBrand());
-        carroExistente.setManufactureYear(carNovosDados.getManufactureYear());
-        carroExistente.setCarStatus(carNovosDados.isCarStatus());
-        return this.carRepository.save(carroExistente);
+        Car existingCar = this.findById(id);
+        existingCar.setName(newCarData.getName());
+        existingCar.setColor(newCarData.getColor());
+        existingCar.setPrice(newCarData.getPrice());
+        existingCar.setBrand(newCarData.getBrand());
+        existingCar.setManufactureYear(newCarData.getManufactureYear());
+        existingCar.setCarStatus(newCarData.isCarStatus());
+        return this.carRepository.save(existingCar);
     }
 
     public Car softDelete(Long id) {
-        Car carroParaInativar = this.findById(id);
-        carroParaInativar.setCarStatus(false);
-        return this.carRepository.save(carroParaInativar);
+        Car carToInactivate = this.findById(id);
+        carToInactivate.setCarStatus(false);
+        return this.carRepository.save(carToInactivate);
     }
 }
