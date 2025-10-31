@@ -5,6 +5,8 @@ import com.practice.localiza.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CarService {
 
@@ -23,6 +25,9 @@ public class CarService {
         } else return null;
     }
 
+    public List<Car> findAll() {
+        return this.carRepository.findAll();
+    }
     public Car update(Long id, Car newCarData) {
 
         Car existingCar = this.findById(id);
