@@ -3,10 +3,7 @@ package com.practice.localiza.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
@@ -20,8 +17,10 @@ public class Brand {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(unique = true)
     private String name;
-    private String cpnj;
+    @Column(unique = true)
+    private String cnpj;
 
     @OneToMany(mappedBy = "brand")
     @JsonIgnore
