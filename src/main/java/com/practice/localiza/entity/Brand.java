@@ -1,6 +1,7 @@
 package com.practice.localiza.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,23 +15,15 @@ import java.util.List;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Car {
+public class Brand {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String color;
-    private Double price;
-    private Integer manufactureYear;
-    private boolean carStatus;
+    private String cpnj;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private Brand brand;
-
-
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name="car_owners")
-    private List<Owner> owners;
-
+    @OneToMany(mappedBy = "brand")
+    @JsonIgnore
+    private List<Car> cars;
 }

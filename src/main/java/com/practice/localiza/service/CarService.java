@@ -1,5 +1,6 @@
 package com.practice.localiza.service;
 
+import com.practice.localiza.entity.Brand;
 import com.practice.localiza.entity.Car;
 import com.practice.localiza.repository.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,20 @@ public class CarService {
     }
 
     public Car findById(Long id) {
-        return carRepository.findById(id).orElse(null);
+        return this.carRepository.findById(id).orElse(null);
+    }
+
+    public List<Car> findByName(String name) {
+        return this.carRepository.findByName(name);
+    }
+    public List<Car> findYearGte(Integer manufactureYear) {
+        return this.carRepository.findByYearGte(manufactureYear);
+    }
+
+    public List<Car> findByBrand(long brandId) {
+        Brand brand = new Brand();
+        brand.setId(brandId);
+        return carRepository.findByBrand(brand);
     }
 
     public List<Car> findAll() {
