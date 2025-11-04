@@ -12,7 +12,8 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/car")
+@RequestMapping("/api/car")
+@CrossOrigin("*") // posso colocar "http://localhost:4200") permitindo só requisições dessa origim
 public class CarController {
 
     @Autowired
@@ -28,7 +29,7 @@ public class CarController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/findAll")
     public ResponseEntity<List<Car>> findAll() {
         try {
             List<Car> list = carService.findAll();
@@ -58,14 +59,14 @@ public class CarController {
         }
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<Car> delete(@PathVariable Long id) {
+    public ResponseEntity<String> delete(@PathVariable Long id) {
         try {
-            Car carroInativado = this.carService.softDelete(id);
-            return ResponseEntity.ok(carroInativado);
+            String mensage = this.carService.softDelete(id);
+            return new ResponseEntity<>(mensage, HttpStatus.OK);
 
         } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
-        }
+            String errorMessage = "Error: Could not process delete request for ID " + id + "Error: "+ e;
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMessage);        }
     }
 
     @GetMapping("/findByName")

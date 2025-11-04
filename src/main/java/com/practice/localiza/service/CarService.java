@@ -3,6 +3,7 @@ package com.practice.localiza.service;
 import com.practice.localiza.entity.Brand;
 import com.practice.localiza.entity.Car;
 import com.practice.localiza.repository.CarRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,8 +37,9 @@ public class CarService {
     }
 
     public List<Car> findAll() {
-        return this.carRepository.findAll();
+        return this.carRepository.findAllByCarStatusTrue();
     }
+
     public Car update(Long id, Car newCarData) {
 
         Car existingCar = this.findById(id);
@@ -49,10 +51,11 @@ public class CarService {
         existingCar.setCarStatus(newCarData.isCarStatus());
         return this.carRepository.save(existingCar);
     }
-
-    public Car softDelete(Long id) {
+    @Transactional
+    public String softDelete(Long id) {
         Car carToInactivate = this.findById(id);
         carToInactivate.setCarStatus(false);
-        return this.carRepository.save(carToInactivate);
+        this.carRepository.save(carToInactivate);
+        return "Car was successfully inactivated. ID: " +  carToInactivate.getId();
     }
 }

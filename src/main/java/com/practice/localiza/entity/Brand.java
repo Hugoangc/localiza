@@ -19,10 +19,10 @@ public class Brand {
     private Long id;
     @Column(unique = true)
     private String name;
-    @Column(unique = true)
-    private String cnpj;
 
     @OneToMany(mappedBy = "brand")
     @JsonIgnore
     private List<Car> cars;
+
+
 }
