@@ -14,7 +14,7 @@ Este é o repositório do backend para a aplicação de gerenciamento de frotas 
 * **Gerenciamento de Relacionamentos:** Lógica para vincular e desvincular Carros com Marcas (`@ManyToOne`) e Acessórios (`@ManyToMany`).
 * **Documentação de API:** Configurado com SpringDoc (Swagger) para documentação interativa e testes de endpoint.
 
-## 🛠️ Tecnologias Utilizadas (Backend)
+##  Tecnologias Utilizadas (Backend)
 
 * **Java 17**
 * **Spring Boot 3.5.7**
