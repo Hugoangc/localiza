@@ -16,9 +16,9 @@ public class AcessoryService {
     @Autowired
     private AcessoryRepository acessoryRepository;
 
-    public Page<Acessory> findAll(int numPage, int qtidPorPagina){
+    public Page<Acessory> findAll(int numPage, int qtdePerPage){
 
-        PageRequest config = PageRequest.of(numPage-1, qtidPorPagina);
+        PageRequest config = PageRequest.of(numPage-1, qtdePerPage);
 
         return this.acessoryRepository.findAll(config);
     }

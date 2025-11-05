@@ -28,12 +28,12 @@ public class Car {
     private Integer manufactureYear;
     private boolean carStatus;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne //(cascade = CascadeType.ALL)
     private Brand brand;
 
+    @ManyToMany
+    @JoinTable(name = "car_acessory")
+    private List<Acessory> acessories;
 
-//    @ManyToMany(cascade = CascadeType.ALL)
-//    @JoinTable(name="car_owners")
-//    private List<User> users;
 
 }
