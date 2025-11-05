@@ -23,16 +23,20 @@ public class AcessoryController {
     public ResponseEntity<Page<Acessory>> findAll(
             @PathVariable("numPage") int numPage,
             @PathVariable("qtdePerPage") int qtdePerPage){
-        Page<Acessory> lista = this.acessoryService.findAll(numPage, qtdePerPage);
-        return new ResponseEntity<>(lista, HttpStatus.OK);
+        Page<Acessory> list = this.acessoryService.findAll(numPage, qtdePerPage);
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
-    @GetMapping("/findByNome")
-    public ResponseEntity<List<Acessory>> findByNome(@RequestParam("name") String name){
-        List<Acessory> lista = this.acessoryService.findByName(name);
-        return new ResponseEntity<>(lista, HttpStatus.OK);
+    @GetMapping("/findByName")
+    public ResponseEntity<List<Acessory>> findByName(@RequestParam("name") String name){
+        List<Acessory> list = this.acessoryService.findByName(name);
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
-
+    @GetMapping("/findNames")
+    public ResponseEntity<List<Acessory>> findNames(@RequestParam("name") String name){
+        List<Acessory> list = this.acessoryService.findByName(name);
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
 
     @GetMapping("/findById/{id}")
     public ResponseEntity<?> findById(@PathVariable("id") long id){

@@ -26,6 +26,9 @@ public class CarService {
     public List<Car> findByName(String name) {
         return this.carRepository.findByName(name);
     }
+    public List<Car> findNames(String name) {
+        return this.carRepository.findByNameContainingIgnoreCase(name);
+    }
     public List<Car> findYearGte(Integer manufactureYear) {
         return this.carRepository.findByYearGte(manufactureYear);
     }
@@ -49,6 +52,7 @@ public class CarService {
         existingCar.setBrand(newCarData.getBrand());
         existingCar.setManufactureYear(newCarData.getManufactureYear());
         existingCar.setCarStatus(newCarData.isCarStatus());
+        existingCar.setAcessories(newCarData.getAcessories());
         return this.carRepository.save(existingCar);
     }
     @Transactional
