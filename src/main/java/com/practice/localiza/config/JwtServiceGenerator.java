@@ -30,13 +30,13 @@ public class JwtServiceGenerator {
 	public static final int HORAS_EXPIRACAO_TOKEN = 1;
 
 	public Map<String, Object> gerarPayload(Usuario usuario){
-		//AQUI VOCÊ PODE COLOCAR O QUE MAIS VAI COMPOR O PAYLOAD DO TOKEN
+		//COMPOR O PAYLOAD DO TOKEN
 		
 		Map<String, Object> payloadData = new HashMap<>();
 		payloadData.put("username", usuario.getUsername());
 		payloadData.put("id", usuario.getId().toString());
 		payloadData.put("role", usuario.getRole());
-		payloadData.put("outracoisa", "teste");
+		//payloadData.put("outracoisa", "teste");
 		
 		return payloadData;
 	}
@@ -44,9 +44,7 @@ public class JwtServiceGenerator {
 	///////////////////////////////////////////////////////
 
 	
-	
-	
-	
+
 	public String generateToken(Usuario usuario) {
 
 		Map<String, Object> payloadData = this.gerarPayload(usuario);
