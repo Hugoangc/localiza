@@ -80,6 +80,17 @@ public class CarController {
         }
 
     }
+    @GetMapping("/findNames")
+    public ResponseEntity<List<Car>> findNames(@RequestParam String name) {
+        try{
+            List<Car> list = carService.findNames(name);
+            return new ResponseEntity<>(list, HttpStatus.OK);
+
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+
+    }
 
 
     @GetMapping("/findByBrand")
