@@ -3,6 +3,8 @@ package com.practice.localiza.config;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.practice.localiza.exception.DuplicateEntryException;
+import com.practice.localiza.exception.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -43,6 +45,15 @@ public class GlobalExceptionHandler {
 		return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
 	}
 
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<String> handleResourceNotFound(ResourceNotFoundException ex) {
+        return new ResponseEntity<String>(ex.getMessage(), HttpStatus.NOT_FOUND); // Retorna a mensagem com 404
+    }
+
+    @ExceptionHandler(DuplicateEntryException.class)
+    public ResponseEntity<String> handleDuplicateEntry(DuplicateEntryException ex) {
+        return new ResponseEntity<String>(ex.getMessage(), HttpStatus.CONFLICT); // Retorna a mensagem com 409
+    }
 }
 
 

@@ -3,6 +3,7 @@ package com.practice.localiza.auth;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
@@ -19,27 +20,39 @@ public class LoginService {
 	private AuthenticationManager authenticationManager;
 
 
-	
-	public String logar(Login login) {
+    public String logar(Login login) {
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            login.getUsername(),
+                            login.getPassword()
+                    )
+            );
+            Usuario user = repository.findByUsername(login.getUsername()).get();
+            String jwtToken = jwtService.generateToken(user);
+            return jwtToken;
+        } catch (BadCredentialsException e) {
+            throw new RuntimeException("Credenciais inválidas.");
+        }
+    }
+//	public String logar(Login login) {
+//		String token = this.gerarToken(login);
+//		return token;
+//	}
 
-		String token = this.gerarToken(login);
-		return token;
-
-	}
 
 
-
-	public String gerarToken(Login login) {
-		authenticationManager.authenticate(
-				new UsernamePasswordAuthenticationToken(
-						login.getUsername(),
-						login.getPassword()
-						)
-				);
-		Usuario user = repository.findByUsername(login.getUsername()).get();
-		String jwtToken = jwtService.generateToken(user);
-		return jwtToken;
-	}
+//	public String gerarToken(Login login) {
+//		authenticationManager.authenticate(
+//				new UsernamePasswordAuthenticationToken(
+//						login.getUsername(),
+//						login.getPassword()
+//						)
+//				);
+//		Usuario user = repository.findByUsername(login.getUsername()).get();
+//		String jwtToken = jwtService.generateToken(user);
+//		return jwtToken;
+//	}
 
 
 }

@@ -16,13 +16,14 @@ public class LoginController {
 
 	@Autowired
 	private LoginService loginService;
-
 	@PostMapping
-	public ResponseEntity<String> logar(@RequestBody Login login) {
+    public ResponseEntity<String> logar(@RequestBody Login login) {
+        try {
+            String token = loginService.logar(login);
+            return new ResponseEntity<>(token, HttpStatus.OK);
 
-		String token = loginService.logar(login);
-		return new ResponseEntity<>(token, HttpStatus.OK);
-		
-	}
+        } catch (RuntimeException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.UNAUTHORIZED);        }
+    }
 
 }
